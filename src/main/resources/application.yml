@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trading
+    username: postgres
+    password: Shubho@13
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          api-client-oidc:
+            provider: upstox
+            client-id: b1598960-e487-4dda-8798-0861840c9ec8
+            client-secret: 422o3evmyz
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8080/authorized
+        provider:
+          upstox:
+            authorization-uri: https://api-v2.upstox.com/login/authorization/dialog
+            token-uri: https://api-v2.upstox.com/login/authorization/token
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
